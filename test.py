@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 data = pd.read_csv('2023 2024 PL.csv')
