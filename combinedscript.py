@@ -5,6 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
+# Gör allt, callar api för att uppdatera de nuvarande matcherna i [football_matches2.csv] och går igenom historical_matches[i] för att hitta resultat.
 
 # === Step 1: Fetch Real-Time Data ===
 def fetch_real_time_data(api_url, api_token, output_file):

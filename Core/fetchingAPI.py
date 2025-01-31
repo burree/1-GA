@@ -1,6 +1,8 @@
 import requests
 import pandas as pd
 
+# CALLAR ENDAST TILL API FÖR ATT UPPDATERA NUVARNDE MATCHER
+
 # Define the API endpoint and headers
 url = 'https://api.football-data.org/v4/competitions/PL/matches'  # Premier League
 headers = {'X-Auth-Token': '5412d5e47c5d4c34a313710ed20eecb7'}  # API token
@@ -32,7 +34,7 @@ try:
         df = pd.DataFrame(match_data)
 
         # Save the DataFrame to a CSV file
-        df.to_csv('football_matches2.csv', index=False)
+        df.to_csv('football_matches3.csv', index=False)
         print("Dataset saved as football_matches2.csv")
     else:
         print("'matches' key not found in the API response.")
