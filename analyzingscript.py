@@ -5,7 +5,31 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# === Step 1: Fetch Real-Time Data ===
+# Define a mapping of historical team names to current team names
+TEAM_NAME_MAPPING = {
+    "Burnley": "Burnley FC",
+    "Man City": "Manchester City FC",
+    "Arsenal": "Arsenal FC",
+    "Nott'm Forest": "Nottingham Forest FC",
+    "Manchester United": "Manchester United FC",
+    "Fulham": "Fulham FC",
+    # Add more mappings as needed
+}
+
+def standardize_team_names(df):
+    """
+    Standardizes team names in the DataFrame based on a predefined mapping.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing match data.
+
+    Returns:
+        pd.DataFrame: The DataFrame with standardized team names.
+    """
+    df['homeTeam'] = df['homeTeam'].replace(TEAM_NAME_MAPPING)
+    df['awayTeam'] = df['awayTeam'].replace(TEAM_NAME_MAPPING)
+    return df
+
 def fetch_real_time_data(api_url, api_token, output_file):
     """
     Fetches real-time match data from the football API and saves it to a CSV file.
@@ -48,15 +72,7 @@ def fetch_real_time_data(api_url, api_token, output_file):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# === Step 2: Preprocess Historical Data ===
-def preprocess_historical_data(file_paths, output_file="historical_matches_cleaned.csv"):
-    """
-    Processes historical football match data to match the structure of the current matches CSV.
-
-    Args:
-        file_paths (list): List of file paths for historical match CSVs.
-        output_file (str): Output file to save the cleaned data.
-    """
+def preprocess_historical_data(file_paths, output_file="historical_matches_cleaned2.csv"):
     all_dfs = []
 
     for file_path in file_paths:
@@ -67,17 +83,19 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
         df = pd.read_csv(file_path)
 
         # Select only relevant columns and rename them
-        df_cleaned = df[['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']].copy()
-        df_cleaned.rename(columns={
-            'Date': 'date',
-            'HomeTeam': 'homeTeam',
-            'AwayTeam': 'awayTeam',
-            'FTHG': 'homeScore',
-            'FTAG': 'awayScore'
-        }, inplace=True)
+        df_cleaned = df[['date', 'homeTeam', 'awayTeam', 'homeScore', 'awayScore']].copy()
 
-        # Convert date format (assuming original format is DD/MM/YYYY)
-        df_cleaned['date'] = pd.to_datetime(df_cleaned['date'], format='%d/%m/%Y').dt.strftime('%Y-%m-%dT00:00:00Z')
+        # Convert date format (assuming original format is already in the correct format)
+        df_cleaned['date'] = pd.to_datetime(df_cleaned['date']).dt.strftime('%Y-%m-%dT00:00:00Z')
+
+        # Standardize team names
+        df_cleaned = standardize_team_names(df_cleaned)
+
+        # Add a status column and set it to "FINISHED"
+        df_cleaned['status'] = 'FINISHED'
+
+        # Reorder columns to match the desired format
+        df_cleaned = df_cleaned[['homeTeam', 'awayTeam', 'homeScore', 'awayScore', 'status', 'date']]
 
         # Append to list
         all_dfs.append(df_cleaned)
@@ -91,8 +109,7 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
     else:
         print("No historical data was processed.")
         return pd.DataFrame()
-
-# === Step 3: Load Historical Data ===
+        
 def load_historical_data(file_pattern, num_files):
     """
     Loads and combines multiple historical match CSV files into a single DataFrame.
@@ -107,7 +124,6 @@ def load_historical_data(file_pattern, num_files):
     file_paths = [file_pattern.format(i) for i in range(num_files)]
     return preprocess_historical_data(file_paths)
 
-# === Step 4: Analyze and Predict ===
 def analyze_and_predict(current_df, historical_df):
     """
     Analyzes the matches from the current dataset and uses historical data to generate insights.
