@@ -81,18 +81,36 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
             continue
 
         df = pd.read_csv(file_path)
+        print(f"DataFrame shape for {file_path}: {df.shape}")
+        print(f"Columns in DataFrame: {df.columns.tolist()}")
+
+        # Check for expected columns
+        expected_columns = ['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']
+        missing_columns = [col for col in expected_columns if col not in df.columns]
+        if missing_columns:
+            print(f"Warning: Missing columns in {file_path}: {missing_columns}")
+            continue
 
         # Select only relevant columns and rename them
-        df_cleaned = df[['date', 'homeTeam', 'awayTeam', 'homeScore', 'awayScore']].copy()
+        df_cleaned = df[['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']].copy()
 
-        # Convert date format (assuming original format is already in the correct format)
-        df_cleaned['date'] = pd.to_datetime(df_cleaned['date']).dt.strftime('%Y-%m-%dT00:00:00Z')
+        # Convert date format
+        df_cleaned['date'] = pd.to_datetime(df_cleaned['Date']).dt.strftime('%Y-%m-%dT00:00:00Z')
 
         # Standardize team names
         df_cleaned = standardize_team_names(df_cleaned)
 
         # Add a status column and set it to "FINISHED"
         df_cleaned['status'] = 'FINISHED'
+
+        # Rename columns to match the desired output
+        df_cleaned = df_cleaned.rename(columns={
+            'HomeTeam': 'homeTeam',
+            'AwayTeam': 'awayTeam',
+            'FTHG': 'homeScore',
+            'FTAG': 'awayScore',
+            'date': 'date'
+        })
 
         # Reorder columns to match the desired format
         df_cleaned = df_cleaned[['homeTeam', 'awayTeam', 'homeScore', 'awayScore', 'status', 'date']]
@@ -109,7 +127,7 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
     else:
         print("No historical data was processed.")
         return pd.DataFrame()
-        
+
 def load_historical_data(file_pattern, num_files):
     """
     Loads and combines multiple historical match CSV files into a single DataFrame.

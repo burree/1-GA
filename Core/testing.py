@@ -6,7 +6,7 @@ current_matches_df = pd.read_csv('football_matches2.csv')
 # Load historical matches from multiple CSV files
 historical_dfs = []
 for i in range(0, 5):  # Assuming you have 5 historical CSV files
-    historical_dfs.append(pd.read_csv(f'historical_matches_{i}.csv'))
+    historical_dfs.append(pd.read_csv(f'HISTORICAL/historical_matches_{i}.csv'))
 
 # Combine all historical DataFrames into one
 historical_df = pd.concat(historical_dfs, ignore_index=True)
