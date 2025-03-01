@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# Define a mapping of historical team names to current team names
+# Define a mapping of historical team names to current team names b
 TEAM_NAME_MAPPING = {
     "Burnley": "Burnley FC",
     "Man City": "Manchester City FC",
