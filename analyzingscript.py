@@ -84,7 +84,9 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
         df_cleaned = df[['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']].copy()
 
         # Convert date format
-        df_cleaned['date'] = pd.to_datetime(df_cleaned['Date']).dt.strftime('%Y-%m-%dT00:00:00Z')
+        # df_cleaned['date'] = pd.to_datetime(df_cleaned['Date']).dt.strftime('%Y-%m-%dT00:00:00Z')
+        df_cleaned['date'] = pd.to_datetime(df_cleaned['Date'], dayfirst=True, errors='coerce').dt.strftime('%Y-%m-%dT00:00:00Z')
+
 
         # Standardize team names
         df_cleaned = standardize_team_names(df_cleaned)
@@ -178,7 +180,7 @@ def analyze_and_predict(current_df, historical_df):
 
 if __name__ == "__main__":
     API_URL = 'https://api.football-data.org/v4/competitions/PL/matches'
-    API_TOKEN = 'YOUR_API_KEY_HERE'
+    API_TOKEN = '5412d5e47c5d4c34a313710ed20eecb7'
     CURRENT_MATCHES_FILE = 'football_matches2.csv'
 
     current_matches = fetch_real_time_data(API_URL, API_TOKEN, CURRENT_MATCHES_FILE)

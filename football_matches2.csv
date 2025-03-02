@@ -249,26 +249,27 @@ Fulham FC,Nottingham Forest FC,2.0,1.0,FINISHED,2025-02-15T15:00:00Z
 Crystal Palace FC,Everton FC,1.0,2.0,FINISHED,2025-02-15T17:30:00Z
 Liverpool FC,Wolverhampton Wanderers FC,2.0,1.0,FINISHED,2025-02-16T14:00:00Z
 Tottenham Hotspur FC,Manchester United FC,1.0,0.0,FINISHED,2025-02-16T16:30:00Z
-Leicester City FC,Brentford FC,,,TIMED,2025-02-21T20:00:00Z
-Everton FC,Manchester United FC,,,TIMED,2025-02-22T12:30:00Z
-Ipswich Town FC,Tottenham Hotspur FC,,,TIMED,2025-02-22T15:00:00Z
-Fulham FC,Crystal Palace FC,,,TIMED,2025-02-22T15:00:00Z
-Arsenal FC,West Ham United FC,,,TIMED,2025-02-22T15:00:00Z
-AFC Bournemouth,Wolverhampton Wanderers FC,,,TIMED,2025-02-22T15:00:00Z
-Southampton FC,Brighton & Hove Albion FC,,,TIMED,2025-02-22T15:00:00Z
-Aston Villa FC,Chelsea FC,,,TIMED,2025-02-22T17:30:00Z
-Newcastle United FC,Nottingham Forest FC,,,TIMED,2025-02-23T14:00:00Z
-Manchester City FC,Liverpool FC,,,TIMED,2025-02-23T16:30:00Z
-Brighton & Hove Albion FC,AFC Bournemouth,,,TIMED,2025-02-25T19:30:00Z
-Crystal Palace FC,Aston Villa FC,,,TIMED,2025-02-25T19:30:00Z
-Wolverhampton Wanderers FC,Fulham FC,,,TIMED,2025-02-25T19:30:00Z
-Chelsea FC,Southampton FC,,,TIMED,2025-02-25T20:15:00Z
-Nottingham Forest FC,Arsenal FC,,,TIMED,2025-02-26T19:30:00Z
-Brentford FC,Everton FC,,,TIMED,2025-02-26T19:30:00Z
-Tottenham Hotspur FC,Manchester City FC,,,TIMED,2025-02-26T19:30:00Z
-Manchester United FC,Ipswich Town FC,,,TIMED,2025-02-26T19:30:00Z
-Liverpool FC,Newcastle United FC,,,TIMED,2025-02-26T20:15:00Z
-West Ham United FC,Leicester City FC,,,TIMED,2025-02-27T20:00:00Z
+Aston Villa FC,Liverpool FC,2.0,2.0,FINISHED,2025-02-19T19:30:00Z
+Leicester City FC,Brentford FC,0.0,4.0,FINISHED,2025-02-21T20:00:00Z
+Everton FC,Manchester United FC,2.0,2.0,FINISHED,2025-02-22T12:30:00Z
+Ipswich Town FC,Tottenham Hotspur FC,1.0,4.0,FINISHED,2025-02-22T15:00:00Z
+Fulham FC,Crystal Palace FC,0.0,2.0,FINISHED,2025-02-22T15:00:00Z
+Arsenal FC,West Ham United FC,0.0,1.0,FINISHED,2025-02-22T15:00:00Z
+AFC Bournemouth,Wolverhampton Wanderers FC,0.0,1.0,FINISHED,2025-02-22T15:00:00Z
+Southampton FC,Brighton & Hove Albion FC,0.0,4.0,FINISHED,2025-02-22T15:00:00Z
+Aston Villa FC,Chelsea FC,2.0,1.0,FINISHED,2025-02-22T17:30:00Z
+Newcastle United FC,Nottingham Forest FC,4.0,3.0,FINISHED,2025-02-23T14:00:00Z
+Manchester City FC,Liverpool FC,0.0,2.0,FINISHED,2025-02-23T16:30:00Z
+Brighton & Hove Albion FC,AFC Bournemouth,2.0,1.0,FINISHED,2025-02-25T19:30:00Z
+Crystal Palace FC,Aston Villa FC,4.0,1.0,FINISHED,2025-02-25T19:30:00Z
+Wolverhampton Wanderers FC,Fulham FC,1.0,2.0,FINISHED,2025-02-25T19:30:00Z
+Chelsea FC,Southampton FC,4.0,0.0,FINISHED,2025-02-25T20:15:00Z
+Nottingham Forest FC,Arsenal FC,0.0,0.0,FINISHED,2025-02-26T19:30:00Z
+Brentford FC,Everton FC,1.0,1.0,FINISHED,2025-02-26T19:30:00Z
+Tottenham Hotspur FC,Manchester City FC,0.0,1.0,FINISHED,2025-02-26T19:30:00Z
+Manchester United FC,Ipswich Town FC,3.0,2.0,FINISHED,2025-02-26T19:30:00Z
+Liverpool FC,Newcastle United FC,2.0,0.0,FINISHED,2025-02-26T20:15:00Z
+West Ham United FC,Leicester City FC,2.0,0.0,FINISHED,2025-02-27T20:00:00Z
 Nottingham Forest FC,Manchester City FC,,,TIMED,2025-03-08T12:30:00Z
 Brighton & Hove Albion FC,Fulham FC,,,TIMED,2025-03-08T15:00:00Z
 Crystal Palace FC,Ipswich Town FC,,,TIMED,2025-03-08T15:00:00Z
@@ -279,15 +280,13 @@ Tottenham Hotspur FC,AFC Bournemouth,,,TIMED,2025-03-09T14:00:00Z
 Chelsea FC,Leicester City FC,,,TIMED,2025-03-09T14:00:00Z
 Manchester United FC,Arsenal FC,,,TIMED,2025-03-09T16:30:00Z
 West Ham United FC,Newcastle United FC,,,TIMED,2025-03-10T20:00:00Z
-Aston Villa FC,Liverpool FC,2.0,2.0,FINISHED,2025-03-15T12:30:00Z
 Everton FC,West Ham United FC,,,TIMED,2025-03-15T15:00:00Z
 Ipswich Town FC,Nottingham Forest FC,,,TIMED,2025-03-15T15:00:00Z
 Manchester City FC,Brighton & Hove Albion FC,,,TIMED,2025-03-15T15:00:00Z
-Newcastle United FC,Crystal Palace FC,,,TIMED,2025-03-15T15:00:00Z
 Southampton FC,Wolverhampton Wanderers FC,,,TIMED,2025-03-15T15:00:00Z
 AFC Bournemouth,Brentford FC,,,TIMED,2025-03-15T17:30:00Z
-Arsenal FC,Chelsea FC,,,TIMED,2025-03-16T00:00:00Z
-Fulham FC,Tottenham Hotspur FC,,,TIMED,2025-03-16T00:00:00Z
+Arsenal FC,Chelsea FC,,,TIMED,2025-03-16T13:30:00Z
+Fulham FC,Tottenham Hotspur FC,,,TIMED,2025-03-16T13:30:00Z
 Leicester City FC,Manchester United FC,,,TIMED,2025-03-16T19:00:00Z
 AFC Bournemouth,Ipswich Town FC,,,TIMED,2025-04-01T18:45:00Z
 Arsenal FC,Fulham FC,,,TIMED,2025-04-01T18:45:00Z
@@ -319,6 +318,7 @@ Newcastle United FC,Manchester United FC,,,SCHEDULED,2025-04-12T00:00:00Z
 Nottingham Forest FC,Everton FC,,,SCHEDULED,2025-04-12T00:00:00Z
 Southampton FC,Aston Villa FC,,,SCHEDULED,2025-04-12T00:00:00Z
 Wolverhampton Wanderers FC,Tottenham Hotspur FC,,,SCHEDULED,2025-04-12T00:00:00Z
+Newcastle United FC,Crystal Palace FC,,,TIMED,2025-04-16T18:30:00Z
 Aston Villa FC,Newcastle United FC,,,SCHEDULED,2025-04-19T00:00:00Z
 Brentford FC,Brighton & Hove Albion FC,,,SCHEDULED,2025-04-19T00:00:00Z
 Crystal Palace FC,AFC Bournemouth,,,SCHEDULED,2025-04-19T00:00:00Z
