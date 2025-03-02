@@ -5,16 +5,33 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# Define a mapping of historical team names to current team names b
+# Define a mapping of historical team names to current team names 
 TEAM_NAME_MAPPING = {
     "Burnley": "Burnley FC",
     "Man City": "Manchester City FC",
     "Arsenal": "Arsenal FC",
     "Nott'm Forest": "Nottingham Forest FC",
+    "Nottingham Forest": "Nottingham Forest FC",
     "Manchester United": "Manchester United FC",
+    "Man United": "Manchester United FC",
     "Fulham": "Fulham FC",
-    # Add more mappings as needed
+    "Brighton": "Brighton & Hove Albion FC",
+    "Spurs": "Tottenham Hotspur FC",
+    "Tottenham": "Tottenham Hotspur FC",
+    "West Ham": "West Ham United FC",
+    "Newcastle": "Newcastle United FC",
+    "Bournemouth": "AFC Bournemouth",
+    "Crystal Palace": "Crystal Palace FC",
+    "Leicester": "Leicester City FC",
+    "Southampton": "Southampton FC",
+    "Everton": "Everton FC",
+    "Aston Villa": "Aston Villa FC",
+    "Brentford": "Brentford FC",
+    "Chelsea": "Chelsea FC",
+    "Liverpool": "Liverpool FC",
+    "Ipswich": "Ipswich Town FC",
 }
+
 
 def standardize_team_names(df):
     """
