@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# Define a mapping of historical team names to current team names 
+# Define a mapping of historical team names to current team names
 TEAM_NAME_MAPPING = {
     "Burnley": "Burnley FC",
     "Man City": "Manchester City FC",
@@ -32,15 +32,14 @@ TEAM_NAME_MAPPING = {
     "Ipswich": "Ipswich Town FC",
 }
 
-
 def standardize_team_names(df):
-    
+
     df['homeTeam'] = df['homeTeam'].replace(TEAM_NAME_MAPPING)
     df['awayTeam'] = df['awayTeam'].replace(TEAM_NAME_MAPPING)
     return df
 
 def fetch_real_time_data(api_url, api_token, output_file):
-    
+ 
     headers = {'X-Auth-Token': api_token}  
     try:
         response = requests.get(api_url, headers=headers)
@@ -80,15 +79,6 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
             continue
 
         df = pd.read_csv(file_path)
-        print(f"DataFrame shape for {file_path}: {df.shape}")
-        print(f"Columns in DataFrame: {df.columns.tolist()}")
-
-        # Check for expected columns
-        expected_columns = ['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']
-        missing_columns = [col for col in expected_columns if col not in df.columns]
-        if missing_columns:
-            print(f"Warning: Missing columns in {file_path}: {missing_columns}")
-            continue
 
         # Select only relevant columns and rename them
         df_cleaned = df[['Date', 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG']].copy()
@@ -128,12 +118,22 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
         return pd.DataFrame()
 
 def load_historical_data(file_pattern, num_files):
-    
     file_paths = [file_pattern.format(i) for i in range(num_files)]
     return preprocess_historical_data(file_paths)
 
 def analyze_and_predict(current_df, historical_df):
-   
+    
+    # Standardize team names
+    historical_df = standardize_team_names(historical_df)
+    current_df = standardize_team_names(current_df)
+
+    # Check for unmatched teams
+    unmatched_home = set(current_df['homeTeam']) - set(historical_df['homeTeam'])
+    unmatched_away = set(current_df['awayTeam']) - set(historical_df['awayTeam'])
+
+    print("Unmatched Home Teams:", unmatched_home)
+    print("Unmatched Away Teams:", unmatched_away)
+
     print("Available Matches:")
     for index, row in current_df.iterrows():
         print(f"{index}: {row['homeTeam']} vs {row['awayTeam']} on {row['date']}")
@@ -149,58 +149,40 @@ def analyze_and_predict(current_df, historical_df):
         ((historical_df['homeTeam'] == away_team) & (historical_df['awayTeam'] == home_team))
     ]
 
-    # Prepare data for training
     if historical_matches.empty:
         print(f"No historical data available for {home_team} vs {away_team}.")
         return
 
-    # Create labels (win=1, draw=0, loss=-1) based on the home team's perspective
     historical_matches['Result'] = historical_matches.apply(
         lambda row: 1 if row['homeScore'] > row['awayScore'] else (-1 if row['homeScore'] < row['awayScore'] else 0), axis=1
     )
 
-    # Features: Home goals, Away goals
     X = historical_matches[['homeScore', 'awayScore']]
     y = historical_matches['Result']
 
-    # Train-test split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Train a logistic regression model
     model = LogisticRegression()
     model.fit(X_train, y_train)
 
-    # Evaluate the model
     predictions = model.predict(X_test)
     accuracy = accuracy_score(y_test, predictions)
     print(f"Model accuracy: {accuracy * 100:.2f}%")
 
-    # Predict the outcome for the selected match
     avg_home_goals = historical_matches['homeScore'].mean()
     avg_away_goals = historical_matches['awayScore'].mean()
     prediction = model.predict([[avg_home_goals, avg_away_goals]])
 
-    # Display the prediction
     result_map = {1: "Win", 0: "Draw", -1: "Loss"}
     print(f"Predicted result for {home_team} vs {away_team}: {result_map[prediction[0]]}")
 
-# === Main Function ===
 if __name__ == "__main__":
-    # API Details
     API_URL = 'https://api.football-data.org/v4/competitions/PL/matches'
-    API_TOKEN = '5412d5e47c5d4c34a313710ed20eecb7'
+    API_TOKEN = 'YOUR_API_KEY_HERE'
     CURRENT_MATCHES_FILE = 'football_matches2.csv'
 
-    # Historical Data Details
-    HISTORICAL_FILE_PATTERN = 'HISTORICAL/historical_matches_{}.csv'
-    NUM_HISTORICAL_FILES = 5
-
-    # Fetch real-time data
     current_matches = fetch_real_time_data(API_URL, API_TOKEN, CURRENT_MATCHES_FILE)
+    historical_data = load_historical_data('HISTORICAL/historical_matches_{}.csv', 5)
 
-    # Load historical data
-    historical_data = load_historical_data(HISTORICAL_FILE_PATTERN, NUM_HISTORICAL_FILES)
-
-    # Analyze and predict
     if current_matches is not None and not historical_data.empty:
         analyze_and_predict(current_matches, historical_data)
