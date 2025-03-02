@@ -34,31 +34,13 @@ TEAM_NAME_MAPPING = {
 
 
 def standardize_team_names(df):
-    """
-    Standardizes team names in the DataFrame based on a predefined mapping.
-
-    Args:
-        df (pd.DataFrame): The DataFrame containing match data.
-
-    Returns:
-        pd.DataFrame: The DataFrame with standardized team names.
-    """
+    
     df['homeTeam'] = df['homeTeam'].replace(TEAM_NAME_MAPPING)
     df['awayTeam'] = df['awayTeam'].replace(TEAM_NAME_MAPPING)
     return df
 
 def fetch_real_time_data(api_url, api_token, output_file):
-    """
-    Fetches real-time match data from the football API and saves it to a CSV file.
-
-    Args:
-        api_url (str): The API endpoint URL.
-        api_token (str): The API authentication token.
-        output_file (str): The path to save the fetched data as a CSV file.
-
-    Returns:
-        pd.DataFrame: A DataFrame containing the fetched match data.
-    """
+    
     headers = {'X-Auth-Token': api_token}  
     try:
         response = requests.get(api_url, headers=headers)
@@ -146,27 +128,12 @@ def preprocess_historical_data(file_paths, output_file="historical_matches_clean
         return pd.DataFrame()
 
 def load_historical_data(file_pattern, num_files):
-    """
-    Loads and combines multiple historical match CSV files into a single DataFrame.
-
-    Args:
-        file_pattern (str): The pattern of the filenames, e.g., "HISTORICAL/historical_matches_{}.csv".
-        num_files (int): The number of historical CSV files to load.
-
-    Returns:
-        pd.DataFrame: A combined DataFrame containing all historical match data.
-    """
+    
     file_paths = [file_pattern.format(i) for i in range(num_files)]
     return preprocess_historical_data(file_paths)
 
 def analyze_and_predict(current_df, historical_df):
-    """
-    Analyzes the matches from the current dataset and uses historical data to generate insights.
-
-    Args:
-        current_df (pd.DataFrame): The DataFrame containing the current match data.
-        historical_df (pd.DataFrame): The DataFrame containing the historical match data.
-    """
+   
     print("Available Matches:")
     for index, row in current_df.iterrows():
         print(f"{index}: {row['homeTeam']} vs {row['awayTeam']} on {row['date']}")
