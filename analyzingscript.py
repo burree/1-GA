@@ -188,3 +188,5 @@ if __name__ == "__main__":
 
     if current_matches is not None and not historical_data.empty:
         analyze_and_predict(current_matches, historical_data)
+
+
